@@ -1,0 +1,123 @@
+{
+  "name": "nestjs-shopify-api",
+  "description": "@shopify/shopify-api module for Nest framework (node.js)",
+  "version": "1.0.0",
+  "license": "MIT",
+  "homepage": "https://github.com/adrianbrs/nestjs-shopify-api#readme",
+  "author": "Adrian Cerbaro <adrian@cerbaro.dev>",
+  "scripts": {
+    "build": "rimraf -rf dist && tsc -p tsconfig.build.json",
+    "dev": "rimraf -rf dist && tsc -p tsconfig.build.json -w",
+    "format": "prettier --write \"{lib,tests}/**/*.ts\"",
+    "lint": "eslint 'lib/**/*.ts' --fix",
+    "precommit": "lint-staged",
+    "prepublish:npm": "pnpm build",
+    "publish:npm": "pnpm publish --access public",
+    "prepublish:next": "pnpm build",
+    "publish:next": "pnpm publish --access public --tag next",
+    "prerelease": "pnpm build",
+    "release": "release-it",
+    "test": "pnpm test:e2e && pnpm test:cov",
+    "test:cov": "jest --coverage",
+    "test:dev": "jest --watch",
+    "test:e2e": "jest -c ./test/jest-e2e.json --runInBand",
+    "test:e2e:dev": "jest -c ./test/jest-e2e.json --runInBand --watch",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+git@github.com:adrianbrs/nestjs-shopify-api.git"
+  },
+  "bugs": {
+    "email": "adrian@cerbaro.dev",
+    "url": "https://github.com/adrianbrs/nestjs-shopify-api/issues"
+  },
+  "keywords": [
+    "shopify",
+    "api",
+    "nestjs",
+    "module"
+  ],
+  "devDependencies": {
+    "@commitlint/cli": "^17.4.0",
+    "@commitlint/config-angular": "^17.4.0",
+    "@nestjs/common": "^9.2.1",
+    "@nestjs/core": "^9.2.1",
+    "@nestjs/platform-express": "^9.2.1",
+    "@nestjs/testing": "^9.2.1",
+    "@shopify/shopify-api": "^6.0.0",
+    "@types/jest": "^29.2.5",
+    "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.48.0",
+    "@typescript-eslint/parser": "^5.48.0",
+    "conventional-changelog-cli": "^2.2.2",
+    "eslint": "^8.31.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.3",
+    "jest": "^29.3.1",
+    "lint-staged": "^13.1.0",
+    "prettier": "^2.8.1",
+    "reflect-metadata": "^0.1.13",
+    "release-it": "^15.6.0",
+    "rimraf": "^3.0.2",
+    "supertest": "^6.2.2",
+    "ts-jest": "^29.0.3",
+    "typescript": "^4.9.4"
+  },
+  "peerDependencies": {
+    "@nestjs/common": "^8.0.0 || ^9.0.0",
+    "@nestjs/core": "^8.0.0 || ^9.0.0",
+    "@shopify/shopify-api": "^6.0.0",
+    "rxjs": "^7.1.0",
+    "reflect-metadata": "^0.1.12"
+  },
+  "engines": {
+    "node": ">= 12.9.0"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -c .commitlintrc.json -E HUSKY_GIT_PARAMS",
+      "pre-commit": "lint-staged"
+    }
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "testEnvironment": "node",
+    "verbose": true,
+    "testMatch": [
+      "<rootDir>/lib/**/*.spec.ts"
+    ],
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "coverageDirectory": "./coverage",
+    "collectCoverageFrom": [
+      "lib/**/*.ts",
+      "!lib/**/index.ts",
+      "!lib/**/*.constants.ts",
+      "!lib/**/*.module.ts",
+      "!lib/**/*.interface.ts",
+      "!**/node_modules/**"
+    ],
+    "globals": {
+      "ts-jest": {
+        "tsconfig": "<rootDir>/tsconfig.json"
+      }
+    }
+  },
+  "dependencies": {
+    "path-to-regexp": "^6.2.1",
+    "raw-body": "^2.5.1"
+  }
+}
